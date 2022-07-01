@@ -71,11 +71,14 @@ const App = () => {
         setPersons(persons.concat(newPerson))
         setMessage({content: `Added ${newPerson.personName}`, color_green: true})
       })
+      .catch(error => {
+        console.log(error.response.data)
+      })
     setNewName('')
     setNewNumber('')
   }
 
-  const deletePerson = deletedPerson => {
+  const deletePerson = (deletedPerson) => {
     const accepted = window.confirm(`Delete ${deletedPerson.personName}?`)
     if (accepted) {
       personService.remove(deletedPerson.id).then(() => {
@@ -101,6 +104,9 @@ const App = () => {
     } 
     else
       createNewPerson()
+    .catch(error => {
+      console.log(error.response.data)
+    })
   }
 
 
